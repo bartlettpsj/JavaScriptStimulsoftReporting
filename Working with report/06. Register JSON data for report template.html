@@ -28,7 +28,8 @@
 
 		var jsonString = "{\"Customers\":[{\"CustomerID\":\"ALFKI\",\"CompanyName\":\"IQ Software Services\",\"ContactName\":\"Paul Bartlett\",\"ContactTitle\":\"Sales Representative\",\"Address\":\"Obere Str. 57\",\"City\":\"Berlin\",\"Region\":null,\"PostalCode\":\"12209\",\"Country\":\"Germany\",\"Phone\":\"030-0074321\",\"Fax\":\"030-0076545\"},{\"CustomerID\":\"ANATR\",\"CompanyName\":\"Everyone Counts.com\",\"ContactName\":\"Izzak Brassea\",\"ContactTitle\":\"Owner\",\"Address\":\"Avda. de la Constitución 2222\",\"City\":\"México D.F.\",\"Region\":null,\"PostalCode\":\"05021\",\"Country\":\"Mexico\",\"Phone\":\"(5) 555-4729\",\"Fax\":\"(5) 555-3745\"}]}";
 
-		for (var i=0; i<100000; i++) {
+		// Just up the loop coounter to generate more data
+		for (var i=0; i<50000; i++) {
             dataSet.readJson(jsonString);
         }
 
@@ -39,8 +40,8 @@
 
 		// Uncomment if you want to see this on the UI
 
-//        var viewer = new Stimulsoft.Viewer.StiViewer();
-//        viewer.report = report;
+        var viewer = new Stimulsoft.Viewer.StiViewer();
+        viewer.report = report;
 
 		// Render report with registered data
 		report.render();
@@ -68,7 +69,7 @@
             Object.saveAs(data, fileName + ".pdf", "application/pdf");
         }
 
-        saveReportPdf(); // generates the PDF and download
+//        saveReportPdf(); // generates the PDF and download
 
 	</script>
 </body>

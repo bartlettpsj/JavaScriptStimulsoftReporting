@@ -1,76 +1,76 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Register JSON data for report template</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Register JSON data for report template</title>
 
-	<link href="../css/stimulsoft.viewer.office2007.blue.css" rel="stylesheet">
+    <link href="../css/stimulsoft.viewer.office2007.blue.css" rel="stylesheet">
 
-	<!-- Stimusloft Reports.JS -->
-	<script src="../scripts/stimulsoft.reports.js" type="text/javascript"></script>
-	<script src="../scripts/stimulsoft.viewer.js" type="text/javascript"></script>
+    <!-- Stimusloft Reports.JS -->
+    <script src="../scripts/stimulsoft.reports.js" type="text/javascript"></script>
+    <script src="../scripts/stimulsoft.viewer.js" type="text/javascript"></script>
 
 </head>
 <body>
-	Load 'SimpleList' report template and render it.
-	<br><br>
-	
-	<script type="text/javascript">
-		// Create a new report instance
-		var report = new Stimulsoft.Report.StiReport();
-		// Load report from url
-		report.loadFile("../reports/SimpleList.mrt");
-		
-		// Create new DataSet object
-		var dataSet = new Stimulsoft.System.Data.DataSet("Demo");
-		// Load JSON data file from specified URL to the DataSet object
-		// dataSet.readJsonFile("../reports/Data.json");
+Load 'SimpleList' report template and render it.
+<br><br>
 
-		var jsonString = "{\"Customers\":[{\"CustomerID\":\"ALFKI\",\"CompanyName\":\"IQ Software Services\",\"ContactName\":\"Paul Bartlett\",\"ContactTitle\":\"Sales Representative\",\"Address\":\"Obere Str. 57\",\"City\":\"Berlin\",\"Region\":null,\"PostalCode\":\"12209\",\"Country\":\"Germany\",\"Phone\":\"030-0074321\",\"Fax\":\"030-0076545\"},{\"CustomerID\":\"ANATR\",\"CompanyName\":\"Everyone Counts.com\",\"ContactName\":\"Izzak Brassea\",\"ContactTitle\":\"Owner\",\"Address\":\"Avda. de la Constitución 2222\",\"City\":\"México D.F.\",\"Region\":null,\"PostalCode\":\"05021\",\"Country\":\"Mexico\",\"Phone\":\"(5) 555-4729\",\"Fax\":\"(5) 555-3745\"}]}";
+<script type="text/javascript">
+    // Create a new report instance
+    var report = new Stimulsoft.Report.StiReport();
+    // Load report from url
+    report.loadFile("../reports/SimpleList.mrt");
 
-		// Just up the loop coounter to generate more data
-		for (var i=0; i<50000; i++) {
-            dataSet.readJson(jsonString);
-        }
+    // Create new DataSet object
+    var dataSet = new Stimulsoft.System.Data.DataSet("Demo");
+    // Load JSON data file from specified URL to the DataSet object
+    // dataSet.readJsonFile("../reports/Data.json");
 
-		// Remove all connections from the report template
-		report.dictionary.databases.clear();
-		// Register DataSet object
-		report.regData("Demo", "Demo", dataSet);
+    var jsonString = "{\"Customers\":[{\"CustomerID\":\"ALFKI\",\"CompanyName\":\"IQ Software Services\",\"ContactName\":\"Paul Bartlett\",\"ContactTitle\":\"Sales Representative\",\"Address\":\"Obere Str. 57\",\"City\":\"Berlin\",\"Region\":null,\"PostalCode\":\"12209\",\"Country\":\"Germany\",\"Phone\":\"030-0074321\",\"Fax\":\"030-0076545\"},{\"CustomerID\":\"ANATR\",\"CompanyName\":\"Everyone Counts.com\",\"ContactName\":\"Izzak Brassea\",\"ContactTitle\":\"Owner\",\"Address\":\"Avda. de la Constitución 2222\",\"City\":\"México D.F.\",\"Region\":null,\"PostalCode\":\"05021\",\"Country\":\"Mexico\",\"Phone\":\"(5) 555-4729\",\"Fax\":\"(5) 555-3745\"}]}";
 
-		// Uncomment if you want to see this on the UI
+    // Just up the loop coounter to generate more data
+    for (var i = 0; i < 50000; i++) {
+        dataSet.readJson(jsonString);
+    }
 
-        var viewer = new Stimulsoft.Viewer.StiViewer();
-        viewer.report = report;
+    // Remove all connections from the report template
+    report.dictionary.databases.clear();
+    // Register DataSet object
+    report.regData("Demo", "Demo", dataSet);
 
-		// Render report with registered data
-		report.render();
-		
-		document.write("Complete.<br>");
-		document.write("Rendered pages count: " + report.renderedPages.count);
+    // Uncomment if you want to see this on the UI
 
-        // Export report to PDF format and save to file
-        function saveReportPdf() {
-            // Create an PDF settings instance. You can change export settings.
-            var settings = new Stimulsoft.Report.Export.StiPdfExportSettings();
-            // Create an PDF service instance.
-            var service = new Stimulsoft.Report.Export.StiPdfExportService();
+    var viewer = new Stimulsoft.Viewer.StiViewer();
+    viewer.report = report;
 
-            // Create a MemoryStream object.
-            var stream = new Stimulsoft.System.IO.MemoryStream();
-            // Export PDF using MemoryStream.
-            service.exportTo(report, stream, settings);
+    // Render report with registered data
+    report.render();
 
-            // Get PDF data from MemoryStream object
-            var data = stream.toArray();
-            // Get report file name
-            var fileName = String.isNullOrEmpty(report.reportAlias) ? report.reportName : report.reportAlias;
-            // Save data to file
-            Object.saveAs(data, fileName + ".pdf", "application/pdf");
-        }
+    document.write("Complete.<br>");
+    document.write("Rendered pages count: " + report.renderedPages.count);
 
-//        saveReportPdf(); // generates the PDF and download
+    // Export report to PDF format and save to file
+    function saveReportPdf() {
+        // Create an PDF settings instance. You can change export settings.
+        var settings = new Stimulsoft.Report.Export.StiPdfExportSettings();
+        // Create an PDF service instance.
+        var service = new Stimulsoft.Report.Export.StiPdfExportService();
 
-	</script>
+        // Create a MemoryStream object.
+        var stream = new Stimulsoft.System.IO.MemoryStream();
+        // Export PDF using MemoryStream.
+        service.exportTo(report, stream, settings);
+
+        // Get PDF data from MemoryStream object
+        var data = stream.toArray();
+        // Get report file name
+        var fileName = String.isNullOrEmpty(report.reportAlias) ? report.reportName : report.reportAlias;
+        // Save data to file
+        Object.saveAs(data, fileName + ".pdf", "application/pdf");
+    }
+
+    //        saveReportPdf(); // generates the PDF and download
+
+</script>
 </body>
 </html>
